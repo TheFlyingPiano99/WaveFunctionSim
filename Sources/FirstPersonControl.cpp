@@ -148,14 +148,6 @@ void Hogra::FirstPersonControl::BeforePhysicsLoopUpdate()
 
 void Hogra::FirstPersonControl::AfterPhysicsLoopUpdate()
 {
-	if (!isWalking) {
-		footstepsAudioSource->Stop();
-	}
-	if (!isFiringLaser) {
-		laserAudioSource->Stop();
-		laserChargeupAudioSource->Stop();
-	}
-	wasFiringLaser = isFiringLaser;
 }
 
 void Hogra::FirstPersonControl::Rotate(const glm::vec2& delta)
@@ -172,8 +164,6 @@ void Hogra::FirstPersonControl::Jump() {
 	}
 	physics->ApplyImpulse(up * jumpImpulse, glm::vec3(0.0f));
 	jumpCoolDown = 1.0f;
-	jumpAudioSource->Play();
-	footstepsAudioSource->Stop();
 }
 
 void Hogra::FirstPersonControl::primaryAction()
@@ -202,14 +192,6 @@ void Hogra::FirstPersonControl::primaryAction()
 		laser->SetOrientation(glm::rotation(glm::vec3(0.0f, 1.0f, 0.0f), dir));
 		laserInpactLight->SetIsActive(true);
 		laserInpactLight->SetPosition(end - dir * 0.5f);
-		if (!laserAudioSource->IsPlaying()) {
-			laserAudioSource->Play();
-		}
-		if (!wasFiringLaser) {
-			laserChargeupAudioSource->Play();
-		}
-		laserCoolDownAudioSource->Stop();
-		isFiringLaser = true;
 	}
 }
 

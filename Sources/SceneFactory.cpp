@@ -55,10 +55,6 @@ namespace Hogra {
 		forwardLayer->SetRenderMode(RenderLayer::RenderMode::forwardRenderMode);
 		forwardLayer->SetName("ForwardLayer");
 		scene->AddRenderLayer(forwardLayer);
-		auto* defLayer = Allocator::New<RenderLayer>();
-		defLayer->SetRenderMode(RenderLayer::RenderMode::deferredInstancedRenderMode);
-		defLayer->SetName("DeferredLayer");
-		scene->AddRenderLayer(defLayer);
 
 		auto* dirShadowCaster = Allocator::New<DirectionalShadowCaster>();
 		dirShadowCaster->Init(glm::vec3(0.0f), glm::normalize(glm::vec3(1.0f, 1.0f, -1.0f)));
@@ -67,117 +63,9 @@ namespace Hogra {
 		light1->SetShadowCaster(dirShadowCaster);
 		scene->AddLight(light1);	// Directional light
 		
-		auto* light2 = Allocator::New<PointLight>();
-		light2->Init(glm::vec4(-40.0f, 4.0f, 0.0f, 1.0f), glm::vec3(100.0f, 50.0f, 50.0f));
-		auto* omniCaster = Allocator::New<OmniDirectionalShadowCaster>();
-		omniCaster->Init();
-		light2->SetShadowCaster(omniCaster);
-		scene->AddLight(light2);
-		light2 = Allocator::New<PointLight>();
-		light2->Init(glm::vec4(0.0f, 2.0f, 80.0f, 1.0f), glm::vec3(50.0f, 100.0f, 50.0f));
-		omniCaster = Allocator::New<OmniDirectionalShadowCaster>();
-		omniCaster->Init();
-		light2->SetShadowCaster(omniCaster);
-		scene->AddLight(light2);
-		light2 = Allocator::New<PointLight>();
-		light2->Init(glm::vec4(80.0f, 2.0f, 0.0f, 1.0f), glm::vec3(40.0f, 40.0f, 60.0f));
-		omniCaster = Allocator::New<OmniDirectionalShadowCaster>();
-		omniCaster->Init();
-		light2->SetShadowCaster(omniCaster);
-		scene->AddLight(light2);
-		std::srand(0);
-		for (int i = 0; i < 10; i++) {
-			auto* lightInst = Allocator::New<PointLight>();
-			lightInst->Init(glm::vec4(std::rand() % 1000 - 500, 2.0f, std::rand() % 1000 - 500, 1.0f), glm::vec3(5.0f, 5.0f, 5.0f));
-			scene->AddLight(lightInst);
-		}
-		
-		InitSkyBox(scene);
-
-		InitGround(scene);
-
-		
-		ForceField* field = InitGravitation(scene);
-		auto* col = InitCompositeCollider();
-		InitCube(scene, glm::vec3(0.0f, 0.0f, 0.0f), col, field);
-		col = InitCompositeCollider();
-		InitCube(scene, glm::vec3(0.0f, 10.0f, 30.0f), col, field);
-		col = InitCompositeCollider();
-		InitCube(scene, glm::vec3(30.0f, 10.0f, 0.0f), col, field);
-		col = InitCompositeCollider();
-		InitCube(scene, glm::vec3(-30.0f, 10.0f, 30.0f), col, field);
-		col = InitCompositeCollider();
-		InitCube(scene, glm::vec3(0.0f, 10.0f, -30.0f), col, field);
-		col = InitCompositeCollider();
-		InitCube(scene, glm::vec3(0.0f, 3.0f, 0.0f), col, field);
-		InitSphere(scene, glm::vec3(-20.0f, 3.0f, -20.0f), field, "TexturesCom_Paint_GoldFake_512");
-		InitSphere(scene, glm::vec3(-20.0f, 3.0f, -10.0f), field, "TexturesCom_Paint_GoldFake_512");
-		InitSphere(scene, glm::vec3(-30.0f, 3.0f, -10.0f), field, "TexturesCom_Paint_GoldFake_512");
-		InitSphere(scene, glm::vec3(-10.0f, 3.0f, -20.0f), field, "TexturesCom_Paint_GoldFake_512");
-		scene->AddPhysicsScript(
-			[light2](float dt, float totalTime) { light2->SetPosition(glm::vec3(10.0 * sinf(totalTime * 0.6), 4, -15)); }
-		);
-		
-		for (int i = 0; i < 5; i++) {
-			InitSphere(scene, glm::vec3(-10.0f + 0.02f * (float)(i % 2), 3.0f + (float)i * 5.0f, -20.0f), field, "TexturesCom_Wood_Planks1_2x2_1K");
-		}
-		for (int i = 5; i < 10; i++) {
-			InitSphere(scene, glm::vec3(-11.0f + 0.02f * (float)(i % 2), 3.0f + (float)i * 5.0f, -20.0f), field, "TexturesCom_Wood_Planks1_2x2_1K");
-		}
-
-		glm::vec3 color1 = glm::vec3(0.0f, 0.1f, 1.0f);
-		glm::vec3 color2 = glm::vec3(0.0f, 1.0f, 0.0f);
-		for (int i = 10; i < 15; i++) {
-			auto* obj 
-				= InitSphere(
-					scene, glm::vec3(-10.0f + 0.05f * (float)(i % 2), 
-					3.0f + (float)i * 5.0f, -10.0f), field, "glowing", (i % 2 == 1)? color1 : color2
-				);
-			auto* light = Allocator::New<PointLight>();
-			light->Init(glm::vec4(0.0f, 0.0f, 0.0f, 1.0f), 50.0f * (i % 2 == 1) ? color1 : color2);
-			
-			auto caster = Allocator::New<OmniDirectionalShadowCaster>();
-			caster->Init();
-			light->SetShadowCaster(caster);
-			caster->SetPositionProvider(light);
-			obj->AddComponent(light);
-			auto* provider = Allocator::New<PositionConnector>();
-			provider->Init(obj);
-			light->SetPositionProvider(provider);
-			scene->AddLight(light);
-		}
-
-		auto* logoSpriteObj = SceneObjectFactory::GetInstance()->Create2DSpriteObject(
-			AssetFolderPathManager::getInstance()->getTextureFolderPath().append("sprites/HoGraEngineLogo.png"),
-			&scene->GetCamera()
-		);
-		
-		auto* logoSpriteCollider = Allocator::New<AABBCollider>();
-		logoSpriteCollider->Init();
-		logoSpriteCollider->SetPositionProvider(logoSpriteObj);
-		logoSpriteCollider->setMinRelToPosition(glm::vec3(-1.0f, -2.0f, -1.0f));
-		logoSpriteCollider->setMaxRelToPosition(glm::vec3(1.0f, 2.0f, 1.0f));
-		auto* logoSpritePhys = Allocator::New<Physics>();
-		logoSpritePhys->Init(logoSpriteObj);
-		logoSpritePhys->SetMomentOfInertia(Physics::GetMomentOfInertiaOfCuboid(50, glm::vec3(2,2,2)));
-		logoSpritePhys->SetMass(50);
-		logoSpritePhys->SetElasticity(0.5f);
-		logoSpritePhys->SetFriction(0.2f);
-		field->AddAffectedPhysics(logoSpritePhys);
-		logoSpriteCollider->SetPhysics(logoSpritePhys);
-		logoSpriteObj->AddComponent(logoSpritePhys);
-		logoSpriteObj->AddComponent(logoSpriteCollider);
-		logoSpriteObj->SetPosition(glm::vec3(-15.0f, 10.0f, -20.0f));
-		scene->AddCollider(logoSpriteCollider);
-		scene->AddSceneObject(logoSpriteObj, "logo_sprite", "ForwardLayer");
-
-		InitLoadedGeometry(scene, glm::vec3(-10.0f, 3.0f, -30.0f), field);
 
 		FirstPersonControl* control = nullptr;
-		InitAvatar(scene, field, control);
-		//InitCaptions(scene);
-
-		InitAudio(scene, control);
+		InitAvatar(scene, nullptr, control);
 
 		// Post processing:
 		{
@@ -253,15 +141,6 @@ namespace Hogra {
 			);
 			ControlActionManager::getInstance()->RegisterKeyAction(moveRight);
 
-			auto* jump = Allocator::New<ButtonKeyAction>();
-			jump->Init(GLFW_KEY_SPACE, ButtonKeyAction::TriggerType::triggerOnPress);
-			jump->SetAction(
-				[control]() {
-					control->Jump();
-				}
-			);
-			ControlActionManager::getInstance()->RegisterKeyAction(jump);
-
 			auto* saveFBOs = Allocator::New<ButtonKeyAction>();
 			saveFBOs->Init(GLFW_KEY_P, ButtonKeyAction::TriggerType::triggerOnPress);
 			saveFBOs->SetAction(
@@ -297,16 +176,6 @@ namespace Hogra {
 			);
 			ControlActionManager::getInstance()->RegisterMouseMoveAction(moveCam);
 			
-			// Shooting:
-			auto* shoot = Allocator::New<ButtonKeyAction>();
-			shoot->Init(GLFW_MOUSE_BUTTON_LEFT, ButtonKeyAction::TriggerType::triggerContinuosly);
-			shoot->SetAction(
-				[control]() {
-					control->primaryAction();
-				}
-			);
-			ControlActionManager::getInstance()->RegisterMouseButtonAction(shoot);
-
 		}
 		return scene;
 	}
