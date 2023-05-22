@@ -646,6 +646,9 @@ namespace Hogra {
 		ShaderProgram* shader = ShaderProgramFactory::GetInstance()->GetDeferredPBRProgramWithMapping();
 		auto* volumeMaterial = MaterialFactory::GetInstance()->getPBRMaterial("lumpy-wet-concrete");
 		Geometry* geometry = GeometryLoader().Load(AssetFolderPathManager::getInstance()->getGeometryFolderPath().append("mango.obj"));
+		if (nullptr == geometry) {
+			return;
+		}
 		geometry->SetFaceCulling(false);
 		auto* mesh = Allocator::New<Mesh>();
 		mesh->Init(volumeMaterial, geometry);

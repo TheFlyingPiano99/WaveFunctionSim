@@ -22,6 +22,9 @@
     <Filter Include="Header Files\View">
       <UniqueIdentifier>{0129485d-eb1a-44a5-a5c4-789d5fad8c11}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Model">
+      <UniqueIdentifier>{303efccb-d57d-4f7d-a2b4-7528a9ef79de}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Header Files\Controler">
       <UniqueIdentifier>{c17091e4-a585-43e9-a12a-8ef1c703bc11}</UniqueIdentifier>
     </Filter>
@@ -43,26 +46,29 @@
     <Filter Include="Header Files\OpenALObjects">
       <UniqueIdentifier>{b8022d03-d4fe-4f5b-8cd9-0a9305e3a83e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Model\Collision">
+      <UniqueIdentifier>{abbda47a-d2d7-47fd-ae16-c97a0c3d86e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Model\Factories">
+      <UniqueIdentifier>{f3d9861e-58b5-4922-b52a-14a7a73a7193}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Model\UserControls">
+      <UniqueIdentifier>{8d84df0f-8d14-4c96-a678-1f97e8f05aba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Model\Lighting">
+      <UniqueIdentifier>{0f6ba421-ec2c-4c51-9c3e-fccf30ce7c43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Model\Animations">
+      <UniqueIdentifier>{37fabc3f-7254-41d9-afdf-8382bc164645}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Header Files\View\Text">
       <UniqueIdentifier>{c0ecc28f-5d13-4569-b3fa-cde09786736d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files\Scenes">
-      <UniqueIdentifier>{e19ec4f1-d8af-47fc-bf97-c6ccc6e6887e}</UniqueIdentifier>
+    <Filter Include="Header Files\volumetric">
+      <UniqueIdentifier>{e34f44c3-a9a5-40b6-9cc0-57ac28052bce}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Animations">
-      <UniqueIdentifier>{37fabc3f-7254-41d9-afdf-8382bc164645}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Collision">
-      <UniqueIdentifier>{abbda47a-d2d7-47fd-ae16-c97a0c3d86e0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Factories">
-      <UniqueIdentifier>{f3d9861e-58b5-4922-b52a-14a7a73a7193}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Lighting">
-      <UniqueIdentifier>{0f6ba421-ec2c-4c51-9c3e-fccf30ce7c43}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\UserControls">
-      <UniqueIdentifier>{8d84df0f-8d14-4c96-a678-1f97e8f05aba}</UniqueIdentifier>
+    <Filter Include="Header Files\fallingSand">
+      <UniqueIdentifier>{f658a671-17ea-4da2-97c0-3c1a51a5c3bf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -177,7 +183,7 @@
     <ClCompile Include="Texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PointLight.cpp">
+    <ClCompile Include="Light.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PostProcessStage.cpp">
@@ -231,7 +237,7 @@
     <ClCompile Include="HoGraEngineApplication.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DirectionalShadowCaster.cpp">
+    <ClCompile Include="ShadowCaster.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PositionProvider.cpp">
@@ -327,6 +333,12 @@
     <ClCompile Include="SceneObjectFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="volumetric\TransferFunction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="volumetric\VolumeObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="ScriptObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -336,29 +348,47 @@
     <ClCompile Include="RenderLayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Identifiable.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DebugUtils.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ScriptProvider.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ShadowCaster.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="OmniDirectionalShadowCaster.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DirectionalLight.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Renderer.cpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Model</Filter>
     </ClCompile>
-    <ClCompile Include="LagrangianMechanics.cpp">
+    <ClCompile Include="volumetric\BoundingGeometry.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fallingSand\chunk.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fallingSand\gas.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fallingSand\liquid.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fallingSand\particle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fallingSand\sand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fallingSand\solid.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fallingSand\stone.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fallingSand\water.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fallingSand\smoke.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fallingSand\steam.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fallingSand\lava.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fallingSand\ice.cpp">
+      <Filter>Header Files\fallingSand</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -416,11 +446,20 @@
     <ClInclude Include="TextureCube.h">
       <Filter>Header Files\OpenGLObjects</Filter>
     </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneObject.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
     <ClInclude Include="GUI.h">
       <Filter>Header Files\View</Filter>
     </ClInclude>
     <ClInclude Include="Callbacks.h">
       <Filter>Header Files\Controler</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Header Files\Model</Filter>
     </ClInclude>
     <ClInclude Include="AssetFolderPathManager.h">
       <Filter>Header Files\Controler</Filter>
@@ -440,11 +479,26 @@
     <ClInclude Include="MathUtil.h">
       <Filter>Header Files\Math</Filter>
     </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Plane.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
     <ClInclude Include="ShaderProgram.h">
       <Filter>Header Files\OpenGLObjects</Filter>
     </ClInclude>
+    <ClInclude Include="Geometry.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
     <ClInclude Include="Texture.h">
       <Filter>Header Files\OpenGLObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="PostProcessStage.h">
+      <Filter>Header Files\Model</Filter>
     </ClInclude>
     <ClInclude Include="AudioSource.h">
       <Filter>Header Files\OpenALObjects</Filter>
@@ -452,17 +506,29 @@
     <ClInclude Include="AudioListener.h">
       <Filter>Header Files\OpenALObjects</Filter>
     </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Ray.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
     <ClInclude Include="AABBCollider.h">
-      <Filter>Header Files\Collision</Filter>
+      <Filter>Header Files\Model\Collision</Filter>
     </ClInclude>
     <ClInclude Include="Collider.h">
-      <Filter>Header Files\Collision</Filter>
+      <Filter>Header Files\Model\Collision</Filter>
     </ClInclude>
     <ClInclude Include="SphericalCollider.h">
-      <Filter>Header Files\Collision</Filter>
+      <Filter>Header Files\Model\Collision</Filter>
     </ClInclude>
     <ClInclude Include="CuboidCollider.h">
-      <Filter>Header Files\Collision</Filter>
+      <Filter>Header Files\Model\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="ForceField.h">
+      <Filter>Header Files\Model</Filter>
     </ClInclude>
     <ClInclude Include="CollisionEventListener.h">
       <Filter>Header Files\Controler</Filter>
@@ -480,49 +546,64 @@
       <Filter>Header Files\Controler</Filter>
     </ClInclude>
     <ClInclude Include="CompositeCollider.h">
-      <Filter>Header Files\Collision</Filter>
+      <Filter>Header Files\Model\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="PositionProvider.h">
+      <Filter>Header Files\Model</Filter>
     </ClInclude>
     <ClInclude Include="UniformBuffer.h">
       <Filter>Header Files\OpenGLObjects</Filter>
     </ClInclude>
+    <ClInclude Include="InstanceGroup.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
     <ClInclude Include="CollisionManager.h">
-      <Filter>Header Files\Collision</Filter>
+      <Filter>Header Files\Model\Collision</Filter>
     </ClInclude>
     <ClInclude Include="ColliderGroup.h">
-      <Filter>Header Files\Collision</Filter>
+      <Filter>Header Files\Model\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="GeometryLoader.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ScaleProvider.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="OrientationProvider.h">
+      <Filter>Header Files\Model</Filter>
     </ClInclude>
     <ClInclude Include="GeometryFactory.h">
-      <Filter>Header Files\Factories</Filter>
+      <Filter>Header Files\Model\Factories</Filter>
     </ClInclude>
     <ClInclude Include="MaterialFactory.h">
-      <Filter>Header Files\Factories</Filter>
+      <Filter>Header Files\Model\Factories</Filter>
     </ClInclude>
     <ClInclude Include="ShaderProgramFactory.h">
-      <Filter>Header Files\Factories</Filter>
+      <Filter>Header Files\Model\Factories</Filter>
     </ClInclude>
     <ClInclude Include="UserControl.h">
-      <Filter>Header Files\UserControls</Filter>
+      <Filter>Header Files\Model\UserControls</Filter>
     </ClInclude>
     <ClInclude Include="FirstPersonControl.h">
-      <Filter>Header Files\UserControls</Filter>
+      <Filter>Header Files\Model\UserControls</Filter>
     </ClInclude>
-    <ClInclude Include="PointLight.h">
-      <Filter>Header Files\Lighting</Filter>
+    <ClInclude Include="Light.h">
+      <Filter>Header Files\Model\Lighting</Filter>
     </ClInclude>
     <ClInclude Include="LightManager.h">
-      <Filter>Header Files\Lighting</Filter>
+      <Filter>Header Files\Model\Lighting</Filter>
     </ClInclude>
     <ClInclude Include="DeferredLightingSystem.h">
-      <Filter>Header Files\Lighting</Filter>
+      <Filter>Header Files\Model\Lighting</Filter>
     </ClInclude>
-    <ClInclude Include="DirectionalShadowCaster.h">
-      <Filter>Header Files\Lighting</Filter>
+    <ClInclude Include="ShadowCaster.h">
+      <Filter>Header Files\Model\Lighting</Filter>
     </ClInclude>
     <ClInclude Include="Animation.h">
-      <Filter>Header Files\Animations</Filter>
+      <Filter>Header Files\Model\Animations</Filter>
     </ClInclude>
     <ClInclude Include="CameraAnimation.h">
-      <Filter>Header Files\Animations</Filter>
+      <Filter>Header Files\Model\Animations</Filter>
     </ClInclude>
     <ClInclude Include="HoGraEngineApplication.h">
       <Filter>Header Files</Filter>
@@ -537,10 +618,16 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Bloom.h">
-      <Filter>Header Files\Lighting</Filter>
+      <Filter>Header Files\Model\Lighting</Filter>
     </ClInclude>
     <ClInclude Include="SceneFactory.h">
-      <Filter>Header Files\Factories</Filter>
+      <Filter>Header Files\Model\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneChange.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Header Files\Model</Filter>
     </ClInclude>
     <ClInclude Include="AudioBuffer.h">
       <Filter>Header Files\OpenALObjects</Filter>
@@ -557,14 +644,23 @@
     <ClInclude Include="SceneAudioSource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="AudioManager.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
     <ClInclude Include="UniformVariable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ObserveObjectControl.h">
-      <Filter>Header Files\UserControls</Filter>
+      <Filter>Header Files\Model\UserControls</Filter>
     </ClInclude>
     <ClInclude Include="SceneObjectFactory.h">
-      <Filter>Header Files\Factories</Filter>
+      <Filter>Header Files\Model\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="OrientationConnector.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="PositionConnector.h">
+      <Filter>Header Files\Model</Filter>
     </ClInclude>
     <ClInclude Include="ScriptObject.h">
       <Filter>Header Files</Filter>
@@ -578,98 +674,53 @@
     <ClInclude Include="Renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="volumetric\BoundingGeometry.h">
+      <Filter>Header Files\volumetric</Filter>
+    </ClInclude>
+    <ClInclude Include="volumetric\TransferFunction.h">
+      <Filter>Header Files\volumetric</Filter>
+    </ClInclude>
+    <ClInclude Include="volumetric\VolumeObject.h">
+      <Filter>Header Files\volumetric</Filter>
+    </ClInclude>
     <ClInclude Include="UniformVariableImpl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="jsonParseUtils.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="fallingSand\chunk.h">
+      <Filter>Header Files\fallingSand</Filter>
     </ClInclude>
-    <ClInclude Include="Identifiable.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="fallingSand\gas.h">
+      <Filter>Header Files\fallingSand</Filter>
     </ClInclude>
-    <ClInclude Include="DebugUtils.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="fallingSand\liquid.h">
+      <Filter>Header Files\fallingSand</Filter>
     </ClInclude>
-    <ClInclude Include="ScriptProvider.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="fallingSand\particle.h">
+      <Filter>Header Files\fallingSand</Filter>
     </ClInclude>
-    <ClInclude Include="ShadowCaster.h">
-      <Filter>Header Files\Lighting</Filter>
+    <ClInclude Include="fallingSand\sand.h">
+      <Filter>Header Files\fallingSand</Filter>
     </ClInclude>
-    <ClInclude Include="OmniDirectionalShadowCaster.h">
-      <Filter>Header Files\Lighting</Filter>
+    <ClInclude Include="fallingSand\solid.h">
+      <Filter>Header Files\fallingSand</Filter>
     </ClInclude>
-    <ClInclude Include="DirectionalLight.h">
-      <Filter>Header Files\Lighting</Filter>
+    <ClInclude Include="fallingSand\stone.h">
+      <Filter>Header Files\fallingSand</Filter>
     </ClInclude>
-    <ClInclude Include="AudioManager.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="fallingSand\water.h">
+      <Filter>Header Files\fallingSand</Filter>
     </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="fallingSand\smoke.h">
+      <Filter>Header Files\fallingSand</Filter>
     </ClInclude>
-    <ClInclude Include="Component.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="fallingSand\lava.h">
+      <Filter>Header Files\fallingSand</Filter>
     </ClInclude>
-    <ClInclude Include="ForceField.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="fallingSand\steam.h">
+      <Filter>Header Files\fallingSand</Filter>
     </ClInclude>
-    <ClInclude Include="Geometry.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GeometryLoader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="InstanceGroup.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Material.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Mesh.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="OrientationConnector.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="OrientationProvider.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Physics.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Plane.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PositionConnector.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PositionProvider.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PostProcessStage.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Ray.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ScaleProvider.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneChange.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LagrangianMechanics.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="fallingSand\ice.h">
+      <Filter>Header Files\fallingSand</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -680,10 +731,10 @@
     <None Include="..\Resources\Shaders\volumeBoundingGeometry.vert">
       <Filter>Resource Files\Shaders</Filter>
     </None>
-    <None Include="..\Resources\Shaders\deferredMappedGeometryPass.frag">
+    <None Include="..\Resources\Shaders\defaultDeferred.frag">
       <Filter>Resource Files\Shaders</Filter>
     </None>
-    <None Include="..\Resources\Shaders\instanced3DWithTBN.vert">
+    <None Include="..\Resources\Shaders\defaultDeferred.vert">
       <Filter>Resource Files\Shaders</Filter>
     </None>
     <None Include="..\Resources\Shaders\boundingGeometryFlatColor.frag">
@@ -704,7 +755,19 @@
     <None Include="..\Resources\Shaders\proxyGeometryViewCamera.vert">
       <Filter>Resource Files\Shaders</Filter>
     </None>
-    <None Include="..\Resources\Shaders\forwardSkybox.frag">
+    <None Include="..\Resources\Shaders\quad.frag">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="..\Resources\Shaders\quad.vert">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="..\Resources\Shaders\quad-depth.frag">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="..\Resources\Shaders\skybox.frag">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="..\Resources\Shaders\fullscreenQuad.vert">
       <Filter>Resource Files\Shaders</Filter>
     </None>
     <None Include="..\Resources\Shaders\transfer.frag">
@@ -732,7 +795,7 @@
     <None Include="..\Resources\Shaders\displayNormals.geom">
       <Filter>Resource Files\Shaders</Filter>
     </None>
-    <None Include="..\Resources\Shaders\deferredPBRDirectionalLightingPass.frag">
+    <None Include="..\Resources\Shaders\deferredPBRshading.frag">
       <Filter>Resource Files\Shaders</Filter>
     </None>
     <None Include="..\Resources\Shaders\debug.frag">
@@ -744,7 +807,7 @@
     <None Include="..\Resources\Shaders\glyph.frag">
       <Filter>Resource Files\Shaders</Filter>
     </None>
-    <None Include="..\Resources\Shaders\single2D.vert">
+    <None Include="..\Resources\Shaders\simple2D.vert">
       <Filter>Resource Files\Shaders</Filter>
     </None>
     <None Include="..\Resources\Shaders\caption.frag">
@@ -756,7 +819,7 @@
     <None Include="..\Resources\Shaders\gausianBlur.frag">
       <Filter>Resource Files\Shaders</Filter>
     </None>
-    <None Include="..\Resources\Shaders\deferredEmissiveGeometryPass.frag">
+    <None Include="..\Resources\Shaders\emissive.frag">
       <Filter>Resource Files\Shaders</Filter>
     </None>
     <None Include="..\Resources\Shaders\bloomDownSampling.frag">
@@ -771,10 +834,13 @@
     <None Include="..\Resources\Shaders\bloomRecombine.frag">
       <Filter>Resource Files\Shaders</Filter>
     </None>
+    <None Include="..\Resources\Shaders\simple2D-no-projection.vert">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
     <None Include="..\Resources\Shaders\lightVolume.vert">
       <Filter>Resource Files\Shaders</Filter>
     </None>
-    <None Include="..\Resources\Shaders\deferredPBRLightVolumePass.frag">
+    <None Include="..\Resources\Shaders\deferredPBRshadingLightVolume.frag">
       <Filter>Resource Files\Shaders</Filter>
     </None>
     <None Include="..\Resources\Shaders\depthEffects.frag">
@@ -789,7 +855,7 @@
     <None Include="..\Resources\Shaders\voxelAttenuation.frag">
       <Filter>Resource Files\Shaders</Filter>
     </None>
-    <None Include="..\Resources\Shaders\deferredSprite.frag">
+    <None Include="..\Resources\Shaders\spriteDeferred.frag">
       <Filter>Resource Files\Shaders</Filter>
     </None>
     <None Include="..\Resources\Shaders\voxelAttenuationCheap.frag">
@@ -798,10 +864,10 @@
     <None Include="..\Resources\Shaders\voxelColorCheap.frag">
       <Filter>Resource Files\Shaders</Filter>
     </None>
-    <None Include="..\Resources\Shaders\forwardSprite.frag">
+    <None Include="..\Resources\Shaders\sprite.frag">
       <Filter>Resource Files\Shaders</Filter>
     </None>
-    <None Include="..\Resources\Shaders\single3DWithTBN.vert">
+    <None Include="..\Resources\Shaders\defaultForward.vert">
       <Filter>Resource Files\Shaders</Filter>
     </None>
     <None Include="..\Resources\Shaders\voxelRayCast.frag">
@@ -810,6 +876,7 @@
     <None Include="..\Resources\Shaders\screenQuadrant.vert">
       <Filter>Resource Files\Shaders</Filter>
     </None>
+<<<<<<< HEAD
     <None Include="..\Resources\Shaders\voxelRayCastCheap.frag">
       <Filter>Resource Files\Shaders</Filter>
     </None>
@@ -817,74 +884,17 @@
       <Filter>Resource Files\Shaders</Filter>
     </None>
     <None Include="..\Resources\Shaders\pixelPhysics2.frag">
+=======
+    <None Include="..\Resources\Shaders\boundingBox.frag">
       <Filter>Resource Files\Shaders</Filter>
     </None>
-    <None Include="..\Resources\Shaders\fullScreenQuad.vert">
-      <Filter>Resource Files\Shaders</Filter>
-    </None>
-    <None Include="..\Resources\Shaders\fullScreenQuadWithRayDir.vert">
-      <Filter>Resource Files\Shaders</Filter>
-    </None>
-    <None Include="..\Resources\Shaders\instanced2D.vert">
-      <Filter>Resource Files\Shaders</Filter>
-    </None>
-    <None Include="..\Resources\Shaders\instanced3D.vert">
-      <Filter>Resource Files\Shaders</Filter>
-    </None>
-    <None Include="..\Resources\Shaders\single3D.vert">
-      <Filter>Resource Files\Shaders</Filter>
-    </None>
-    <None Include="..\Resources\Shaders\deferredHomogeneGeometryPass.frag">
-      <Filter>Resource Files\Shaders</Filter>
-    </None>
-    <None Include="..\Resources\Scenes\demoScene00.json">
-      <Filter>Resource Files\Scenes</Filter>
-    </None>
-    <None Include="..\Resources\Scenes\demoScene01.json">
-      <Filter>Resource Files\Scenes</Filter>
-    </None>
-    <None Include="..\Resources\Scenes\sceneIdToFilenameMapping.json">
-      <Filter>Resource Files\Scenes</Filter>
-    </None>
-    <None Include="..\Resources\Shaders\deferredAmbientPass.frag">
-      <Filter>Resource Files\Shaders</Filter>
-    </None>
-    <None Include="..\Resources\Shaders\omniDirShadowCast.frag">
-      <Filter>Resource Files\Shaders</Filter>
-    </None>
-    <None Include="..\Resources\Shaders\omniDirShadowCast.geom">
-      <Filter>Resource Files\Shaders</Filter>
-    </None>
-    <None Include="..\Resources\Shaders\omniDirShadowCast.vert">
-      <Filter>Resource Files\Shaders</Filter>
-    </None>
-    <None Include="..\Resources\Scenes\magicMirrorScene.json">
-      <Filter>Resource Files\Scenes</Filter>
-    </None>
-    <None Include="..\Resources\Shaders\magicMirror.frag">
-      <Filter>Resource Files\Shaders</Filter>
-    </None>
-    <None Include="..\Resources\Shaders\equirectangularToCubemap.frag">
-      <Filter>Resource Files\Shaders</Filter>
-    </None>
-    <None Include="..\Resources\Shaders\equirectangularToCubemap.vert">
-      <Filter>Resource Files\Shaders</Filter>
-    </None>
-    <None Include="..\Resources\Shaders\environmentToIrradiance.frag">
-      <Filter>Resource Files\Shaders</Filter>
-    </None>
-    <None Include="..\Resources\Shaders\environmentToIrradiance.vert">
-      <Filter>Resource Files\Shaders</Filter>
-    </None>
-    <None Include="..\Resources\Shaders\environmentPrefilter.frag">
-      <Filter>Resource Files\Shaders</Filter>
-    </None>
-    <None Include="..\Resources\Shaders\precalculateIndirectBRDF.frag">
+    <None Include="..\Resources\Shaders\boundingBox.vert">
+>>>>>>> attenuation-blur
       <Filter>Resource Files\Shaders</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="HomebrewGraphicsEngine.rc">
+    <ResourceCompile Include="WaveFunctionSim.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>

@@ -22,7 +22,7 @@
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{0f5bc1b2-d956-4795-b55d-c06bb593c52d}</ProjectGuid>
-    <RootNamespace>HomebrewGraphicsEngine</RootNamespace>
+    <RootNamespace>WaveFunctionSim</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -432,7 +432,7 @@
     <None Include="imgui.ini" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="HomebrewGraphicsEngine.rc" />
+    <ResourceCompile Include="WaveFunctionSim.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

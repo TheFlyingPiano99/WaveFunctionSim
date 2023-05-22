@@ -2,6 +2,7 @@
 #include <assimp/Importer.hpp>      // C++ importer interface
 #include <assimp/postprocess.h>      
 #include <assimp/scene.h>      
+#include "DebugUtils.h"
 
 namespace Hogra {
 	Geometry* GeometryLoader::Load(const std::string& path) {
@@ -15,7 +16,8 @@ namespace Hogra {
 			| aiProcess_CalcTangentSpace
 		);
 		if (nullptr == scene) {
-			throw GeometryLoadingException();
+			DebugUtils::PrintError("GeometryLoader", "Failed to load geometry!");
+			return nullptr;
 		}
 		
 		// Process meshes:
