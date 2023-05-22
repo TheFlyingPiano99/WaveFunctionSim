@@ -1,0 +1,60 @@
+# Prerequisites
+*.d
+
+# Visual Studio
+.vs/
+x64/
+Sources/x64/
+*.1.tlog
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+*.log
+*.ilk
+*.idb
+*.pdb
+*.tlog
+*.ipch
+*.opendb
+*.vsidx
+*.lock
+.vs/HomebrewGraphicsEngine/v17/.suo
+*.db
+*.db-shm
+*.db-wal
+*.bin
+*.tlog
+*.iobj
+*.log
+*.pdb
+*.tlog
+
+# Resources
+Saves/*
