@@ -1,0 +1,3 @@
+DELETE voxel shaders
+
+USE single2D shader

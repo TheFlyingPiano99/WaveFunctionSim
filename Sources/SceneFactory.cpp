@@ -63,6 +63,33 @@ namespace Hogra {
 		light1->SetShadowCaster(dirShadowCaster);
 		scene->AddLight(light1);	// Directional light
 		
+		auto program = Allocator::New<ShaderProgram>();
+		program->Init(
+			AssetFolderPathManager::getInstance()->getShaderFolderPath().append("single2D.vert"),
+			"",
+			AssetFolderPathManager::getInstance()->getShaderFolderPath().append("bypass.frag")
+		);
+		auto transformMatrix = Allocator::New < UniformVariable < glm::mat4 >>();
+		auto transform = glm::ortho(0.0f, (float)GlobalVariables::windowWidth, 0.0f, (float)GlobalVariables::windowHeight)
+			* glm::translate(glm::vec3((float)GlobalVariables::windowWidth / 2.0f, (float)GlobalVariables::windowHeight / 2.0f, 0))
+			* glm::scale(glm::vec3(300.0, 300.0, 1.0));
+
+		transformMatrix->Init("transform", transform);
+		program->BindUniformVariable(transformMatrix);
+		Material* material = Allocator::New<Material>();
+		material->Init(program);
+		auto texture = Allocator::New<Texture2D>();
+		//void Init(const char* _buffer, glm::ivec2 _dimensions, GLuint _unit, GLenum _internalFormat, GLenum _format, GLenum _pixelType);
+		std::vector<float> bytes(256 * 256* 4 * 2);
+		texture->Init(bytes.data(), glm::ivec2(256, 256), 0, GL_RGBA16F, GL_RGB, GL_FLOAT);
+		material->AddTexture(texture);
+		auto quadMesh = Allocator::New<Mesh>();
+		quadMesh->Init(material, GeometryFactory::GetInstance()->GetSimpleQuad());
+
+		auto canvasObj = Allocator::New<SceneObject>();
+		canvasObj->Init(quadMesh);
+		scene->AddSceneObject(canvasObj, "canvasObj", "ForwardLayer");
+
 
 		FirstPersonControl* control = nullptr;
 		InitAvatar(scene, nullptr, control);
@@ -318,10 +345,10 @@ namespace Hogra {
 	void SceneFactory::InitCube(Scene* scene, glm::vec3 pos, Collider* collider, ForceField* field)
 	{
 		ShaderProgram* cubeShader = ShaderProgramFactory::GetInstance()->GetDeferredPBRProgramWithMapping();
-		auto* volumeMaterial = MaterialFactory::GetInstance()->getPBRMaterial("stringy_marble");
+		auto* material = MaterialFactory::GetInstance()->getPBRMaterial("stringy_marble");
 		Geometry* cubeGeometry = GeometryFactory::GetInstance()->GetCube();
 		auto* cubeMesh = Allocator::New<Mesh>();
-		cubeMesh->Init(volumeMaterial, cubeGeometry);
+		cubeMesh->Init(material, cubeGeometry);
 		auto* obj = Allocator::New<SceneObject>();
 		obj->Init(cubeMesh);
 		obj->SetPosition(pos);
@@ -513,14 +540,14 @@ namespace Hogra {
 		collider->SetRadius(0.5f);
 		scene->AddCollider(collider);
 		ShaderProgram* shader = ShaderProgramFactory::GetInstance()->GetDeferredPBRProgramWithMapping();
-		auto* volumeMaterial = MaterialFactory::GetInstance()->getPBRMaterial("lumpy-wet-concrete");
+		auto* material = MaterialFactory::GetInstance()->getPBRMaterial("lumpy-wet-concrete");
 		Geometry* geometry = GeometryLoader().Load(AssetFolderPathManager::getInstance()->getGeometryFolderPath().append("mango.obj"));
 		if (nullptr == geometry) {
 			return;
 		}
 		geometry->SetFaceCulling(false);
 		auto* mesh = Allocator::New<Mesh>();
-		mesh->Init(volumeMaterial, geometry);
+		mesh->Init(material, geometry);
 		auto* obj = Allocator::New<SceneObject>();
 		obj->Init(mesh);
 		obj->SetPosition(pos);
@@ -602,10 +629,10 @@ namespace Hogra {
 	{
 		auto obj = Allocator::New<SceneObject>();
 		auto geom = GeometryFactory::GetInstance()->GetCilinder();
-		auto volumeMaterial = MaterialFactory::GetInstance()->getEmissiveMaterial("laser", glm::vec3(1.0f, 0.0f, 0.0f), 30.0f);
+		auto material = MaterialFactory::GetInstance()->getEmissiveMaterial("laser", glm::vec3(1.0f, 0.0f, 0.0f), 30.0f);
 		auto mesh = Allocator::New<Mesh>();
 		mesh->SetDepthTest(false);
-		mesh->Init(volumeMaterial, geom);
+		mesh->Init(material, geom);
 		obj->Init(mesh);
 		obj->SetPosition(glm::vec3(0,5,0));
 		obj->SetIsVisible(true);

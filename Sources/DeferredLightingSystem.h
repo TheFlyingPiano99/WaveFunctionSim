@@ -50,7 +50,7 @@ namespace Hogra {
 		Texture2D depthTexture;
 		Material* materialFullScreen = nullptr;
 		Mesh* meshFullScreen = nullptr;
-		Material* volumeMaterial = nullptr;
+		Material* material = nullptr;
 		Mesh* mesh = nullptr;
 		std::vector<Geometry::LightInstancedData> instanceData;
 	};

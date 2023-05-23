@@ -38,12 +38,12 @@ namespace Hogra {
 			"",
 			AssetFolderPathManager::getInstance()->getShaderFolderPath().append("deferredPBRLightVolumePass.frag"));
 		lightVolumeProgram.SetUniform("farPlane", OMNI_DIR_SHADOW_MAP_FAR_PLANE);
-		volumeMaterial = Allocator::New<Material>();
-		volumeMaterial->Init(&lightVolumeProgram);
-		volumeMaterial->SetAlphaBlend(true);
-		volumeMaterial->SetBlendFunc(GL_ONE, GL_ONE);
+		material = Allocator::New<Material>();
+		material->Init(&lightVolumeProgram);
+		material->SetAlphaBlend(true);
+		material->SetBlendFunc(GL_ONE, GL_ONE);
 		mesh = Allocator::New<Mesh>();
-		mesh->Init(volumeMaterial, GeometryFactory::GetInstance()->getLightVolumeSphere());
+		mesh->Init(material, GeometryFactory::GetInstance()->getLightVolumeSphere());
 		mesh->SetDepthTest(false);
 		mesh->setStencilTest(false);
 
@@ -78,11 +78,11 @@ namespace Hogra {
 
 		gBuffer.Unbind();
 
-		volumeMaterial->ClearTextures();
-		volumeMaterial->AddTexture(&gPosition);
-		volumeMaterial->AddTexture(&gNormal);
-		volumeMaterial->AddTexture(&gAlbedo);
-		volumeMaterial->AddTexture(&gRoughnessMetallicAO);
+		material->ClearTextures();
+		material->AddTexture(&gPosition);
+		material->AddTexture(&gNormal);
+		material->AddTexture(&gAlbedo);
+		material->AddTexture(&gRoughnessMetallicAO);
 
 		materialFullScreen->ClearTextures();
 		materialFullScreen->AddTexture(&gPosition);
@@ -142,7 +142,7 @@ namespace Hogra {
 		mesh->Bind();
 		instanceData.clear();
 		emptyCubeMap.Bind();
-		volumeMaterial->GetShaderProgram()->SetUniform("shadowMaps[0]", &emptyCubeMap);	// First in array is the default, empty map
+		material->GetShaderProgram()->SetUniform("shadowMaps[0]", &emptyCubeMap);	// First in array is the default, empty map
 		for (int i = 0; i < pointLights.size(); i++) {
 			if (pointLights[i]->IsActive()) {
 				int casterIdx = 0;
@@ -150,7 +150,7 @@ namespace Hogra {
 					auto caster = pointLights[i]->GetShadowCaster();
 					casterIdx = caster->GetIdx();
 					caster->GetShadowMap()->Bind();
-					volumeMaterial->GetShaderProgram()->SetUniform(std::string("shadowMaps[").append(std::to_string(casterIdx)).append("]").c_str(), caster->GetShadowMap());
+					material->GetShaderProgram()->SetUniform(std::string("shadowMaps[").append(std::to_string(casterIdx)).append("]").c_str(), caster->GetShadowMap());
 				}
 				Geometry::LightInstancedData d = {
 					pointLights[i]->GetVolumeModelMatrix(),
@@ -173,15 +173,15 @@ namespace Hogra {
 	
 	void DeferredLightingSystem::ExportShadowMaps(const std::vector<OmniDirectionalShadowCaster*>& omniDirShadowCasters)
 	{
-		volumeMaterial->GetShaderProgram()->Activate();
+		material->GetShaderProgram()->Activate();
 		unsigned int i = 0;
-		volumeMaterial->GetShaderProgram()->SetUniform("shadowMaps[0]", &emptyCubeMap);	// First in array is the default, empty map
+		material->GetShaderProgram()->SetUniform("shadowMaps[0]", &emptyCubeMap);	// First in array is the default, empty map
 		for (; i < omniDirShadowCasters.size(); i++) {
-			volumeMaterial->GetShaderProgram()->SetUniform(std::string("shadowMaps[").append(std::to_string(i + 1)).append("]").c_str(), omniDirShadowCasters[i]->GetShadowMap());
+			material->GetShaderProgram()->SetUniform(std::string("shadowMaps[").append(std::to_string(i + 1)).append("]").c_str(), omniDirShadowCasters[i]->GetShadowMap());
 		}
 		for (; i < MAX_SHADOW_MAP_COUNT; i++) {	// Fill the remaining samplers in the array with default, empty map
-			volumeMaterial->GetShaderProgram()->SetUniform(std::string("shadowMaps[").append(std::to_string(i + 1)).append("]").c_str(), &emptyCubeMap);
+			material->GetShaderProgram()->SetUniform(std::string("shadowMaps[").append(std::to_string(i + 1)).append("]").c_str(), &emptyCubeMap);
 		}
-		volumeMaterial->GetShaderProgram()->SetUniform("farPlane", OMNI_DIR_SHADOW_MAP_FAR_PLANE);
+		material->GetShaderProgram()->SetUniform("farPlane", OMNI_DIR_SHADOW_MAP_FAR_PLANE);
 	}
 }
